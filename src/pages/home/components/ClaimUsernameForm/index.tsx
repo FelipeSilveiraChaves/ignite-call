@@ -4,15 +4,20 @@ import { ArrowRight } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/router'
 
 const claimUsernameSchema = z.object({
   username: z
     .string()
     .min(3, { message: 'O usuário precisa conter 3 letras no mínimo' })
-    .regex(/^(a-z\\-]+)$/i, {
+    .regex(/^([a-z\\-]+)$/i, {
       message: 'O usuário pode conter letras e hífens apenas',
     })
-    .transform((username) => username.toLowerCase),
+    .transform((username) => {
+      const nameLowerCased = username.toLowerCase()
+
+      return nameLowerCased
+    }),
 })
 
 type ClaimUsernameFormData = z.infer<typeof claimUsernameSchema>
@@ -26,8 +31,13 @@ export function ClaimUsernameForm() {
     resolver: zodResolver(claimUsernameSchema),
   })
 
+  const router = useRouter()
+
   async function handleClaimUsername(data: ClaimUsernameFormData) {
+    const { username } = data
     console.log(data)
+
+    await router.push(`/register?username=${username}`)
   }
   return (
     <>
