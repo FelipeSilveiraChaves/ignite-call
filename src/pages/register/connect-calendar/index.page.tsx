@@ -14,7 +14,7 @@ export default function Register() {
   console.log(session)
 
   async function handleConnectCalendar() {
-    await signIn('google')
+    await signIn('google', { callbackUrl: '/register/connect-calendar' })
   }
 
   return (

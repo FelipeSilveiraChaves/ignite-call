@@ -134,32 +134,19 @@ export function PrismaAdapter(
           type: account.type,
           provider: account.provider,
           providerAccountId: account.providerAccountId,
-          refreshToken:
-            typeof account.refreshToken === 'string'
-              ? account.refreshToken
-              : null,
-          accessToken:
-            typeof account.accessToken === 'string'
-              ? account.accessToken
-              : null,
-          accessTokenExpires:
-            account.accessTokenExpires instanceof Date
-              ? account.accessTokenExpires
-              : null,
-          tokenType:
-            typeof account.tokenType === 'string' ? account.tokenType : null,
+          refreshToken: account.refreshToken,
+          accessToken: account.accessToken,
+          accessTokenExpires: account.accessTokenExpires,
+          tokenType: account.tokenType,
           scope: account.scope,
-          tokenId: typeof account.tokenId === 'string' ? account.tokenId : null,
-          sessionState:
-            typeof account.sessionState === 'string'
-              ? account.sessionState
-              : null,
+          tokenId: account.tokenId,
+          sessionState: account.sessionState,
         },
       })
     },
 
     async createSession({ sessionToken, userId, expires }) {
-      prisma.session.create({
+      await prisma.session.create({
         data: {
           userId,
           expires,
