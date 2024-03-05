@@ -134,13 +134,15 @@ export function PrismaAdapter(
           type: account.type,
           provider: account.provider,
           providerAccountId: account.providerAccountId,
-          refreshToken: account.refreshToken,
-          accessToken: account.accessToken,
-          accessTokenExpires: account.accessTokenExpires,
-          tokenType: account.tokenType,
+          refreshToken: account.refresh_token,
+          accessToken: account.access_token,
+          accessTokenExpires: account.expires_at
+            ? new Date(account.expires_at)
+            : undefined,
+          tokenType: account.token_type,
           scope: account.scope,
-          tokenId: account.tokenId,
-          sessionState: account.sessionState,
+          tokenId: account.id_token,
+          sessionState: account.session_state,
         },
       })
     },

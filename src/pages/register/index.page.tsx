@@ -79,6 +79,7 @@ export default function Register() {
       <Form as="form" onSubmit={handleSubmit(handleRegister)}>
         <label htmlFor="">
           <Text size="sm">Nome do usuário</Text>
+          {/* @ts-expect-error erro de versao do typescript */}
           <TextInput
             prefix="ignite.com/"
             placeholder={'Seu usuário'}
@@ -89,6 +90,7 @@ export default function Register() {
 
         <label htmlFor="">
           <Text size="sm">Nome Completo</Text>
+          {/* @ts-expect-error erro de versao do typescript */}
           <TextInput placeholder={'Seu nome'} {...register('name')} />
           {errors.name && <FormError>{errors.name.message}</FormError>}
         </label>
